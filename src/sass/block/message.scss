@@ -1,0 +1,68 @@
+.message {
+	position: relative;
+	
+	margin: 15px auto;
+	padding: 10px 0;
+
+	border: 1px dashed $orange;
+}
+
+.message__name-user {
+	margin-bottom: 10px;
+	padding: 0 10px;
+
+	font-family: $confortaa;
+	font-size: $body-fz * 1.1;
+}
+
+.message__date {
+	padding: 0 10px;
+
+	font-family: $bicubic;
+	font-size: $body-fz * 0.9;
+	color: $lightorange;
+	border-bottom: 1px dotted $orange;
+}
+
+.message__img-wrap {
+	position: relative;
+}
+
+.message__img {
+	width: 90%;
+	height: auto;
+	margin: auto;
+	display: block;
+}
+
+.message__text {
+	padding: 10px;
+
+	font-size: $body-fz * 1.1;
+	border-top: 1px dotted $orange;
+	border-collapse: collapse;
+}
+
+.message__text-change {
+	position: absolute;
+	top: 10px;
+	width: 50%;
+	height: 70%;
+}
+
+.message__button {
+	padding: 7px;
+	margin: 0 10px;
+	border-radius: 7px;
+}
+
+.message__btn-change {
+	position: absolute;
+	top: -9px;
+	right: 7px;
+
+	width: 25px;
+
+	background: transparent;
+	border: none;
+}

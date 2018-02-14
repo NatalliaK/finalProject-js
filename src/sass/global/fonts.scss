@@ -1,0 +1,36 @@
+/*@font-face {*/
+	/*font-family: "Helvetica";*/
+	/*src: url(../fonts/BebasNeue.woff2),*/
+	/*url(../fonts/BebasNeue.woff);*/
+/*}*/
+
+/*$bebas: "Helvetica", Helvetica, Arial, sans-serif;*/
+
+@font-face {
+	font-family: "Russo One";
+	src: url(fonts/RussoOne-Regular.woff2)
+}
+
+@font-face {
+	font-family: "Comfortaa";
+	src: url(fonts/Comfortaa-Regular.ttf)
+}
+
+@font-face {
+	font-family: "Seymour One";
+	src: url(fonts/SeymourOne-Regular.ttf)
+}
+
+@font-face {
+	font-family: "Bicubic";
+	src: url(fonts/EIMessiri.ttf)
+}
+
+$russo: "Russo One", Helvetica, Arial, sans-serif;
+$confortaa: "Comfortaa" ,Comic Sans MS, Comic Sans, cursive;
+$seymour: "Seymour One", Helvetica, Arial, sans-serif;
+$bicubic: "Bicubic";
+
+//font-family: 'Play', sans-serif;
+//font-family: 'Russo One', sans-serif;
+//font-family: 'Philosopher', sans-serif;

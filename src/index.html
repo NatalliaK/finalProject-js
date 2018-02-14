@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Тренажерный зал "Athletic"</title>
+	<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-database.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-firestore.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+	<link rel="stylesheet" href="../dist/css/swiper.min.css">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body class="body">
+<div class="wrap">
+	<header class="header" id="header">
+		<h1 class="header__h1">
+			Тренажерный зал <br><span class="header__span">&#8222;Athletic&#8221;</span>
+		</h1>
+		<nav class="main-nav" id="main-nav">
+			<ul class="main-nav__list">
+				<li class="main-nav__item"><a class="main-nav__link" href="#">Главная</a></li>
+				<li class="main-nav__item"><a class="main-nav__link" href="#news">Новости</a></li>
+				<li class="main-nav__item"><a class="main-nav__link" href="#asks">Задать вопрос</a></li>
+			</ul>
+		</nav>
+		<div id="hamburger" class="hamburger">
+			<span class="hamburger__span hamburger__span--1 hamburger__span--closed"></span>
+			<span class="hamburger__span hamburger__span--2 hamburger__span--closed"></span>
+			<span	class="hamburger__span hamburger__span--3 hamburger__span--closed"></span>
+			<span id="hamburger__span-dot-1" class="hamburger__span-dot hamburger__span-dot--1"></span>
+			<span id="hamburger__span-dot-2" class="hamburger__span-dot hamburger__span-dot--2"></span>
+			<span id="hamburger__span-dot-3" class="hamburger__span-dot hamburger__span-dot--3"></span>
+		</div>
+		<div id="sw"></div>
+	</header>
+	<div id="container" class="container"></div>
+	<div id="footer" class="footer"></div>
+</div>
+	<script src="../dist/js/swiper.min.js"></script>
+	<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&load=Map,Placemark"	type="text/javascript"></script>
+	<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+.wrap {
+	width: 100%;
+	margin: auto;
+
+	background-color: $black;
+}
+
+@media (min-width: $tab) {
+	.wrap {
+		&--main {
+			text-align: center;
+			box-shadow: 0 10px 20px white;
+		}
+	}
+}

@@ -1,0 +1,84 @@
+.hamburger {
+	z-index: 6;
+	position: fixed;
+	right: 5%;
+	top: 5%;
+
+	width: 30px;
+	height: 24px;
+	padding-top: 5px;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+
+	cursor: pointer;
+	transform: rotate(0deg);
+	transition: all 0.25s ease-in-out;
+}
+
+.hamburger__span {
+	position: relative;
+	z-index: 6;
+
+	margin: auto;
+	width: 100%;
+	height: 3px;
+
+	border-radius: 100px;
+	opacity: 1;
+	transition-property: background-color, transform, opacity;
+	@include trans($time05);
+	background-color: #fff;
+	
+
+	&--closed {
+		background-color: $white;
+		box-shadow: 1px 1px 1px $black, 1px 1px 2px $orange;
+	}
+
+	&--open {
+		background-color: transparent;
+	}
+
+	&--span-1 {
+		margin-top: 3px;
+		transform: translateY(10px) rotate(45deg);
+		transition-property: background-color, transform;
+		@include trans($time05);
+	}
+
+	&--span-2 {
+		transform: rotate(45deg);
+		transition-property: background-color, transform;
+		@include trans($time05);
+	}
+
+	&--span-3 {
+		transform: translateY(-10px) rotate(45deg);
+		transition-property: background-color, transform;
+		opacity: 0;
+		@include trans($time05);
+	}
+}
+
+.hamburger__span--1.hamburger__span--open {
+	transform: translateY(7px) rotate(135deg);
+	background-color: $orange;
+}
+
+.hamburger__span--3.hamburger__span--open {
+	transform: translateY(-7px) rotate(-135deg);
+	background-color: $orange;
+}
+
+.hamburger:hover .hamburger__span--closed {
+	background-color: $lightorange;
+	transition-delay: 0s;
+}
+
+//@media (min-width: $tab) {
+//	.hamburger {
+//		right: 15%;
+//	}
+//}

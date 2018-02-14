@@ -1,0 +1,28 @@
+.btn-auth-page {
+	display: flex;
+	justify-content: space-around;
+	padding: 10%;
+	align-items: center;
+	background-color: $dark-black;
+}
+
+.btn-auth-page__p {
+
+	color: $orange;
+	font-family: $confortaa;
+	line-height: 2.2em;
+	font-size: $body-fz;
+}
+
+.btn-auth-page__btn-wrap {
+	margin-left: auto;
+	flex-basis: 30px;
+}
+
+.btn-auth-page__btn {
+
+	img {
+		width: 30px;
+		height: 30px;
+	}
+}

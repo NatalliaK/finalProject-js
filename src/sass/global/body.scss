@@ -1,0 +1,16 @@
+.body {
+	position: relative;
+
+	width: 100%;
+	min-width: 320px;
+	height: 100%;
+
+	background: rgba(0, 0, 0, 0.96);
+	font-size: $body-fz;
+}
+
+@media (min-width: $tab) {
+	.body {
+		font-size: $body-fz * 1.5;
+	}
+}

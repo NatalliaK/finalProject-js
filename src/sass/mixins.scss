@@ -1,0 +1,49 @@
+@mixin pad ($pads...){
+	padding: $pads;
+
+	/*@media (min-width: $big-mob) {*/
+		/*padding-right: 30px;*/
+		/*padding-left: 30px;*/
+	/*}*/
+
+	/*@media (min-width: $tab) {*/
+		/*padding-right: 60px;*/
+		/*padding-left: 60px;*/
+	/*}*/
+
+	/*@media (min-width: $desk) {*/
+		/*padding-right: 180px;*/
+		/*padding-left: 180px;*/
+	/*}*/
+}
+
+@mixin marg ($marg...) {
+	margin: $marg;
+
+	/*@media (min-width: $big-mob) {*/
+		/*margin-right: 30px;*/
+		/*margin-left: 30px;*/
+	/*}*/
+
+	/*@media (min-width: $tab) {*/
+		/*margin-right: 60px;*/
+		/*margin-left: 60px;*/
+	/*}*/
+
+	/*@media (min-width: $desk) {*/
+		/*margin-right: 180px;*/
+		/*margin-left: 180px;*/
+	/*}*/
+}
+
+@mixin trans ($time...) {
+	transition-duration: $time;
+	transition-delay: $time;
+}
+
+@mixin center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
