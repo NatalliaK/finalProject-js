@@ -15,10 +15,14 @@
 	font-size: $body-fz * 1.1;
 }
 
+.message__wrap {
+	margin-top: 10px;
+}
+
 .message__date {
 	padding: 0 10px;
 
-	font-family: $bicubic;
+	font-family: $messiri;
 	font-size: $body-fz * 0.9;
 	color: $lightorange;
 	border-bottom: 1px dotted $orange;
@@ -45,7 +49,10 @@
 
 .message__text-change {
 	position: absolute;
-	top: 10px;
+	bottom: 90px;
+	z-index: 3;
+
+	padding: 10px;
 	width: 50%;
 	height: 70%;
 }
