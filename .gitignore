@@ -49,3 +49,5 @@ Thumbs.db
 /build
 /functions/
 $RESOURSE_DIR
+gulpfile.js
+.eslintrc.js

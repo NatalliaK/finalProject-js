@@ -1,6 +1,31 @@
+//{
+//  "rules": {
+//    ".read": "true",
+//    ".write": "auth != null"
+//  }
+//}
+
 {
   "rules": {
-    ".read": "auth != null",
-    ".write": "auth != null"
+    "messages": {
+      "questions": {
+        ".read": true,
+        ".write": "auth !== null"
+      },
+      "answers": {
+        ".read": true,
+        ".write": "auth !== null"
+      }
+    },
+    "news": {
+      ".read": "true",
+      ".write": "true"
+    },
+    "users": {
+      "$uid": {
+        ".read": "auth.uid == $uid",
+        ".write": "auth.uid == $uid"
+      }
+    }
   }
 }

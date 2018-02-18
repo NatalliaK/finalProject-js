@@ -55,7 +55,12 @@ var router = new Router({
 				doc.querySelector('.header').classList.add('header--asks');
 				drawBtnAuth();
 				doc.querySelector('#btnlogIn').addEventListener('click', e => {
-					doc.querySelector('#auth').classList.remove('hide');
+					if (firebase.auth().currentUser) {
+						document.querySelector('#auth').classList.add('hide');
+						alert('Вы уже вошли');
+					} else {
+						doc.querySelector('#auth').classList.remove('hide');
+					}
 				});
 
 				doc.querySelector('#btnLogOut').addEventListener('click', e => {
