@@ -77,8 +77,14 @@
 	transition-delay: 0s;
 }
 
-//@media (min-width: $tab) {
-//	.hamburger {
-//		right: 15%;
-//	}
-//}
+@media (min-width: $tab) {
+	.hamburger {
+		right: 10%;
+	}
+}
+
+@media (min-width: $btab) {
+	.hamburger {
+		right: calc(100% / 2 - 360px);
+	}
+}

@@ -4,9 +4,10 @@ import drawSlider from './slider/drawSlider';
 import runSlider from './slider/runSlider';
 import text from './mainPage/text';
 import MyMap from './mainPage/map/map';
-import drawChat from './asksPage/drawChat';
+import drawChat from './chat/drawChat';
 import drawBtnAuth from './asksPage/drawBtnAuth';
-import Chat from './chat/chat';
+import Asks from './asksPage/asks';
+import News from './newsPage/news';
 
 const doc = document,
 	container = doc.querySelector('#container'),
@@ -41,11 +42,17 @@ var router = new Router({
 			match: 'news',
 			onEnter: () => {
 				doc.querySelector('.header').classList.add('header--news');
-				let container = doc.querySelector('#container');
-				container.innerHTML = '<h1>News</h1>';
+				drawChat(document.querySelector('#container'));
+				doc.querySelector('.chat__form-wrap').classList.remove('hide');
+				var news = new News();
+				news.initFirebase();
+				doc.querySelector('.chat').classList.add('.chat__news');
 			},
 			leave: () => {
 				doc.querySelector('.header').classList.remove('header--news');
+				doc.querySelector('.chat__form-wrap').classList.add('hide');
+				doc.querySelector('.chat').classList.remove('.chat__news');
+				container.innerHTML = '';
 			}
 		},
 		{
@@ -53,30 +60,36 @@ var router = new Router({
 			match: 'asks',
 			onEnter: () => {
 				doc.querySelector('.header').classList.add('header--asks');
-				drawBtnAuth();
-				doc.querySelector('#btnlogIn').addEventListener('click', e => {
-					if (firebase.auth().currentUser) {
-						document.querySelector('#auth').classList.add('hide');
-						alert('Вы уже вошли');
-					} else {
-						doc.querySelector('#auth').classList.remove('hide');
-					}
-				});
+				if (!doc.querySelector('#btnAuth')) {
+					drawBtnAuth();
+					doc.querySelector('#btnlogIn').addEventListener('click', e => {
+						if (firebase.auth().currentUser) {
+							doc.querySelector('#auth').classList.add('hide');
+							alert('Вы уже вошли');
+						} else {
+							doc.querySelector('#auth').classList.remove('hide');
+						}
+					});
 
-				doc.querySelector('#btnLogOut').addEventListener('click', e => {
-					const promise = firebase.auth().signOut();
-					promise
-						.then( () => alert('Выход пользователя.'))
-						.catch(error => alert('Ошибка выхода.'))
-				});
+					doc.querySelector('#btnLogOut').addEventListener('click', e => {
+						const promise = firebase.auth().signOut();
+						promise
+							.then( () => alert('Выход пользователя.'))
+							.catch(error => alert('Ошибка выхода.'))
+					});
+				}
 
-				drawChat(document.querySelector('#container'));
-					var n = new Chat();
-					n.initFirebase();
+				doc.querySelector('#btnAuth').classList.remove('hide');
+
+				drawChat(doc.querySelector('#container'));
+					var asks = new Asks();
+					asks.initFirebase();
 
 			},
 			leave: () => {
 				doc.querySelector('.header').classList.remove('header--asks');
+				doc.querySelector('#auth').classList.add('hide');
+				container.innerHTML = '';
 			}
 		}]
 });

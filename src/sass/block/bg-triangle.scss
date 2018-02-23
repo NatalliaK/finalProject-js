@@ -1,0 +1,30 @@
+.bg-triangle {
+	position: absolute;
+
+	width: 100%;
+
+	&--orange {
+		fill: orange;
+	}
+
+	&--top {
+		top: 0;
+		left: 0;
+	}
+
+	&--bottom {
+		bottom: -91px;
+	}
+}
+
+@media (min-width: $tab) {
+	.bg-triangle {
+		&--top {
+			top: -2px;
+		}
+
+		&--bottom {
+			bottom: -92px;
+		}
+	}
+}

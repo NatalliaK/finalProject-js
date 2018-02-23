@@ -25,7 +25,7 @@
 }
 
 .chat__btn-wrap {
-	margin-top: 10px;
+	margin-top: 20px;
 
 	display: flex;
 	justify-content: space-between;
@@ -61,6 +61,19 @@
 }
 
 .chat__results {
-	width: 80%;
+	width: 90%;
 	margin: 30px auto;
+}
+
+@media (min-width: $tab) {
+	.chat__results {
+		width: 80%;
+	}
+}
+
+@media (min-width: $btab) {
+	.chat {
+		max-width: $btab;
+		margin: 0 auto;
+	}
 }

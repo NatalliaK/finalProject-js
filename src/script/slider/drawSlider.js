@@ -7,7 +7,7 @@ export default function drawSlider() {
 																'<div class="swiper-slide swiper-slide--main" style="background-image:url(img/andrewMansh.jpg)">' +
 																	'<div class="content">' +
 																		'<h2 class="content__title">Андрей</h2>' +
-																		'<p class="content__p">Мастер спорта по бодибилдингу</p>' +
+																		'<p class="content__p">Мастер спорта, двукратный чемпион РБ &#8203; по бодибилдингу</p>' +
 																	'</div>' +
 																'</div>' +
 																'<div class="swiper-slide swiper-slide--main" style="background-image:url(img/roma.jpg)">' +
