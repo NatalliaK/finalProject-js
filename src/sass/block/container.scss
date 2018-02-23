@@ -1,0 +1,41 @@
+.container__wrap {
+	max-width: 830px;
+	margin: 7% auto 5%;
+	padding: 5%;
+
+	font-family: $confortaa;
+}
+
+.container__p-wrap {
+	position: relative;
+
+	padding-top: 58px;
+	padding-bottom: 58px;
+}
+
+.container__p {
+	padding: 30px 20px;
+	line-height: 1.5em;
+
+	&--orange {
+		background-color: orange;
+	}
+}
+
+.container__h3 {
+	margin: 30px 0;
+	padding-left: 30px;
+
+	font-size: $body-fz * 1.7;
+	color: $orange;
+}
+
+.container__list {
+	margin: 30px 0;
+
+	line-height: 1.8;
+}
+
+.container__li {
+	margin: 20px 0;
+}

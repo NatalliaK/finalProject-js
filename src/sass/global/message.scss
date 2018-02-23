@@ -1,0 +1,154 @@
+.message {
+	position: relative;
+	
+	margin: 15px auto;
+	padding: 10px 0;
+
+	border: 1px dashed $orange;
+}
+
+.message__name-user {
+	margin-bottom: 10px;
+	padding: 0 10px;
+
+	font-family: $confortaa;
+	font-size: $body-fz * 1.1;
+}
+
+.message__wrap {
+	margin-top: 10px;
+}
+
+.message__date {
+	padding: 0 10px;
+
+	font-family: $messiri;
+	font-size: $body-fz * 0.9;
+	color: $lightorange;
+	border-bottom: 1px dotted $orange;
+	border-collapse: collapse;
+}
+
+.message__img-wrap {
+	position: relative;
+
+	width: 90%;
+	height: 53vw;
+	padding: 10px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+.message__img {
+	height: auto;
+	margin: auto;
+	display: block;
+}
+
+.message__slide {
+	position: absolute;
+	left: 0;
+	top: 0;
+
+	width: 100%;
+	height: min-content;
+	z-index: 3;
+
+	opacity: 0;
+	transition: opacity 1s;
+	box-sizing: border-box;
+}
+
+.message__img-controls {
+	position: absolute;
+	z-index: 5;
+	top: 50%;
+
+	padding: 1% 3%;
+	color: $brown;
+	font-size: $body-fz * 2;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	transform: translateY(-50%);
+
+	&:hover {
+		color: $lightorange;
+		border: none;
+		outline: none;
+		background-color: transparent;
+	}
+
+	&--prev {
+		left: 3%;
+	}
+
+	&--next {
+		right: 3%;
+	}
+}
+
+.message__text {
+	padding: 10px;
+
+	font-size: $body-fz * 1.1;
+	border-top: 1px dotted $orange;
+	border-collapse: collapse;
+}
+
+.message__text-change {
+	position: absolute;
+	bottom: 90px;
+	z-index: 3;
+
+	padding: 10px;
+	width: 50%;
+	height: 70%;
+
+	font-family: $russo;
+}
+
+.message__button {
+	padding: 7px;
+	margin: 0 10px;
+	border-radius: 7px;
+
+	background-color: $yellow;
+	border: none;
+}
+
+.message__btn-change {
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 5;
+
+	width: 25px;
+
+	background: transparent;
+	border: none;
+}
+
+.message__slide-img {
+	max-width: 100%;
+}
+
+@media (min-width: $tab) {
+	.message__name-user {
+		font-size: $body-fz * 1.3;
+	}
+
+	.message__date {
+		font-size: $body-fz * 1.1;
+	}
+
+	.message__text {
+		padding: 20px;
+	}
+}
+
+@media (min-width: $btab) {
+	.message__img-wrap {
+		height: 334px;
+	}
+}

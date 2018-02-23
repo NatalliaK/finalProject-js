@@ -135,7 +135,7 @@
 	transition-property: all;
 }
 
-@media (min-width: $tab) {
+@media (min-width: $btab) {
 	.main-nav__list {
 		width: 35%;
 		font-size: $body-fz * 1.5;

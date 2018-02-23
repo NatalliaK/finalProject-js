@@ -4,3 +4,9 @@
 	text-align: left;
 	color: $white;
 }
+
+@media (min-width: $btab) {
+	.container {
+		margin-top: 50px;
+	}
+}

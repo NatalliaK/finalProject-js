@@ -1,22 +1,12 @@
-import drawForm from './drawForm';
 import firebaseIn from './../utils/firebase';
 import ProgressBar from '../utils/ProgressBar';
 import changeChatForm from './changeChatForm';
-import drawChat from "../asksPage/drawChat";
+import drawChat from "./drawChat";
 
 export default class Chat {
 	constructor() {
-		drawForm();
 		firebaseIn();
-		this.auth = document.querySelector('#auth');
-		this.emailField = document.querySelector('#email');
-		this.passwordField = document.querySelector('#password');
-		this.nameField = document.querySelector('#name');
-		this.content = document.querySelector('#content');
-		this.close = document.querySelector('#close');
-		this.logInButton = document.querySelector('#logIn');
-		this.signInGoogleButton = document.querySelector('#signInGoogle');
-		this.signUpButton = document.querySelector('#signUp');
+
 		this.postButton = document.querySelector('#post');
 		this.chatMessage = document.querySelector('#chat__message');
 		this.chatFormWrap = document.querySelector('.chat__form-wrap');
@@ -25,93 +15,10 @@ export default class Chat {
 		this.messageButtonAnswer = document.querySelector('#message__button-answer');
 		this.image;
 		this.previosMessageWrap;
-		this.previosMessageBtn;
+		this.files = [];
 
-		this.logInButton.addEventListener('click', this.logIn.bind(this));
-		this.signInGoogleButton.addEventListener('click', this.signWithGoogle.bind(this));
-		this.signUpButton.addEventListener('click', this.signUp.bind(this));
 		this.postButton.addEventListener('click', this.saveMessage.bind(this));
 		this.loadImage.addEventListener('change', this.uploadImg.bind(this));
-		this.close.addEventListener('click', (e) => {
-			document.querySelector('#auth').classList.add('hide');
-		});
-	}
-
-	signUp() {
-		this.signUpButton.addEventListener('click', e => {
-			var email = this.emailField.value;
-			var password = this.passwordField.value;
-			var name = this.nameField.value;
-			const auth = firebase.auth();
-			const promise = auth.createUserWithEmailAndPassword(email, password);
-			promise
-				.then(user => alert('Вы вошли как ' + name))
-				.catch( error => {
-					if (name.length < 1) {
-						alert('Введите имя');
-					}	else if (email.length < 1) {
-						alert('Введите email.');
-					} else if (error.code === 'auth/invalid-email') {
-						alert('Введите email правильно.');
-					} else if(error.code === 'auth/email-already-in-use') {
-						alert('Пользователь с таким email уже зарегистрирован');
-						var credential = firebase.auth.EmailAuthProvider.credential(email, password);
-					} else if (password.length < 6) {
-						alert('Введите пароль.');
-					} else if (error.code === 'auth/wrong-password') {
-						alert('Введите пароль правильно.');
-					} else alert('Ошибка входа. Попробуйте еще раз.')
-				});
-		});
-	}
-
-	signWithGoogle() {
-		this.signInGoogleButton.addEventListener('click', () => {
-			const name = this.nameField.value;
-			const auth = firebase.auth();
-
-			var provider = new firebase.auth.GoogleAuthProvider();
-			const promise = auth.signInWithPopup(provider);
-			promise
-				.then(() => {
-					user => console.log(user)
-				})
-				.catch(error => {
-					alert('Ошибка регистрации. Возможно Вы уже вошли.');
-				})
-		});
-	}
-
-	logIn() {
-		this.logInButton.addEventListener('click', e => {
-			var email = this.emailField.value;
-			var password = this.passwordField.value;
-			const auth = firebase.auth();
-			const promise = auth.signInWithEmailAndPassword(email, password);
-			promise
-				.then(user => console.log(user))
-				.catch( error => {
-					console.log(error.code);
-					if (email.length < 1) {
-						alert('Введите email.');
-					} else if (error.code === 'auth/invalid-email') {
-						alert('Введите email правильно.');
-					} else if (password.length < 1) {
-						alert('Введите пароль.');
-					} else if (error.code === 'auth/weak-password') {
-						alert('Введите пароль правильно.');
-					} else alert('Ошибка регистрации. Попробуйте еще раз.')
-				});
-		});
-	}
-
-	logOut() {
-		this.logOutButton.addEventListener('click', e => {
-			const promise = firebase.auth().signOut();
-			promise
-				.then( () => alert('Выход пользователя.'))
-				.catch(error => alert('Ошибка выхода.'))
-		});
 	}
 
 	initFirebase() {
@@ -122,84 +29,14 @@ export default class Chat {
 		this.auth.onAuthStateChanged(this.onAuthStateChanged.bind(this));
 	}
 
-	onAuthStateChanged(firebaseUser) {
-		this.chatFormWrap.classList.remove('hide');
-		let p = document.querySelector('.btn-auth-page__p');
-
-		this.loadMessages();
-
-		if (document.querySelector('.message')) {
-			var btnChange = document.querySelectorAll('button[btn="change"]');
-			var btnRemove = document.querySelectorAll('button[btn="remove"]');
-			btnChange.forEach((el) => {
-				if (!el.classList.contains('hide')) {
-					el.classList.add('hide');
-				}
-			});
-			btnRemove.forEach((el) => {
-				if (!el.classList.contains('hide')) {
-					el.classList.add('hide');
-				}
-			});
-		}
-		if (firebaseUser) {
-			this.name = this.nameField.value;
-			this.email = this.emailField.value;
-			this.uid = firebaseUser.uid;
-			this.filePath = 'users/' + this.uid;
-			this.fbRef = this.database.ref(this.filePath);
-			if (this.name !== '' && this.email !== '') {
-				this.fbRef.set({
-					userName: this.name,
-					userEmail: this.email
-				});
-			} else if (firebaseUser.displayName) {
-				this.fbRef.set({
-					userName: firebaseUser.displayName
-				})
-			}
-
-			this.fbRef.on('value', (snapshot => {
-				var val = snapshot.val().userName;
-				p.innerHTML = `Вы вошли как ${val}`;
-			}));
-
-			this.emailField.value = '';
-			this.nameField.value = '';
-			this.passwordField.value = '';
-
-			this.loadMessages();
-
-			if (document.querySelector('.message')) {
-				const messages = document.querySelectorAll('.message');
-				messages.forEach((el) => {
-					if (el.getAttribute('data-user') === this.uid) {
-						let btnChange = el.querySelector('button[btn="change"]');
-						let btnRemove = el.querySelector('button[btn="remove"]');
-						btnChange.classList.remove('hide');
-						btnRemove.classList.remove('hide');
-					}
-				})
-			}
-
-			if (this.auth.currentUser && this.uid === this.auth.currentUser.uid) {
-				document.querySelector('#auth').classList.add('hide');
-			}
-		} else {
-			this.chatFormWrap.classList.add('hide');
-			p.innerHTML = 'Чтобы задать вопрос, пожалуйста, войдите под своей учетной записью или зарегистрируйтесь';
-
-		 //this.loadMessages();
-		}
-	}
-
-	loadMessages() {
+	loadMessages(path) {
 		const setMessage = ((snapshot) => {
 			const val = snapshot.val();
 			this.displayMessage(val.uid, val.name, val.text, val.validate, val.url, snapshot.key);
 		}).bind(this);
 
-		this.messagesRef = this.database.ref('messages/questions/');
+		this.messagesRef = this.database.ref(path);
+		// this.messagesRef.off();
 		this.messagesRef.limitToLast(30).on('child_added', setMessage);
 		this.messagesRef.limitToLast(30).on('child_changed', setMessage);
 	}
@@ -214,7 +51,7 @@ export default class Chat {
 			message.setAttribute('data', this.date);
 			message.setAttribute('data-user', this.user);
 			message.classList.add('message');
-			message.innerHTML = `<div class="message__name-user">${name}</div><div class="message__date">${validate}</div><div class="message__text" data=${this.date}><pre>${text}</pre></div><button data=${this.date} btn="answer" class="message__button btn">Ответить</button>`;
+			message.innerHTML = `<div class="message__name-user">${name}</div><div class="message__date">${validate}</div><div class="message__text" data=${this.date}><pre>${text}</pre></div>`;
 			parentEl.insertBefore(message, firstChild);
 			const btnChange = document.createElement('button');
 			btnChange.classList.add('message__button');
@@ -226,9 +63,9 @@ export default class Chat {
 			btnRemove.classList.add('message__button');
 			btnRemove.classList.add('btn');
 			btnRemove.setAttribute('btn', 'remove');
+			btnRemove.setAttribute('data', this.date);
 			btnRemove.innerHTML = 'Удалить';
 			if (!(this.auth.currentUser && uid === this.auth.currentUser.uid)) {
-				console.log('message-hide');
 				btnChange.classList.add('hide');
 				btnRemove.classList.add('hide');
 			}
@@ -236,14 +73,29 @@ export default class Chat {
 			message.appendChild(btnRemove);
 
 			if (url) {
+				this.file = url;
 				const imgWrap = document.createElement('div');
 				imgWrap.classList.add('message__img-wrap');
-				imgWrap.innerHTML = `<img class="message__img" data=${this.date} src=${url}><button btn="delete" class="btn-close message__btn-change hide" data=${key}><img src="img/close-icon1.png" data=${key} image="close" class="message__img"></button>`;
-				const img = document.createElement('img');
-				img.classList.add(`message__img`);
-				img.setAttribute('data', this.date);
-				img.src = url;
 				message.insertBefore(imgWrap, message.children[2]);
+
+				if (typeof url === 'object') {
+
+					if (this.file.length > 1) {
+
+						imgWrap.innerHTML = `<div class="message__img-controls-wrap"><button class="message__img-controls  message__img-controls--prev" controls="prev" data=${this.date}>&lt;</button><button class="message__img-controls  message__img-controls--next" controls="next" data=${this.date}>&gt;</button></div>`;
+
+						this.file.forEach((el) => {
+							const slide = document.createElement('div');
+							slide.classList.add('message__slide');
+							slide.innerHTML = `<img class="message__slide-img" data=${this.date} src=${el}><button btn="delete" class="btn-close message__btn-change hide" data=${key}><img src="img/close.png" data=${key} image="close" class="message__img-close"></button>`;
+							imgWrap.appendChild(slide);
+						});
+
+						message.querySelector('.message__slide').classList.add('show');
+					} else {
+						imgWrap.innerHTML = `<img class="message__img" data=${this.date} src=${this.file}><button btn="delete" class="btn-close message__btn-change hide" data=${key}><img src="img/close.png" data=${key} image="close" class="message__img-close"></button>`;
+					}
+				}
 			}
 
 			if (this.auth.currentUser && uid === this.auth.currentUser.uid) {
@@ -274,24 +126,22 @@ export default class Chat {
 				this.fbRef.on('value', (snapshot => {
 					return val = snapshot.val().userName;}));
 
-			console.log(val);
-
 			//add a new message to the farebase db
 			this.messagesRef.push({
 				uid: currentUser.uid,
 				name: val,
 				text: this.chatMessage.value || '',
 				validate: data.toLocaleString("ru", options),
-				url: this.image || null
+				url: this.dbFiles || null
 			})
 		}
 		this.chatMessage.value = '';
 		this.image = undefined;
 		this.chatMessageLabel.classList.remove('visibility');
+		this.files = [];
 	}
 
 	checkSignedInWithMessage() {
-		return (this.auth.currentUser);
 	}
 
 	uploadImg(e) {
@@ -304,7 +154,7 @@ export default class Chat {
 			'contentType': this.file.type
 		};
 
-		this.chatMessageLabel.classList.add('visibility');
+		this.chatMessageLabelAsks();
 
 		if ((this.file.type === "image/png") || (this.file.type === "image/jpeg")) {
 
@@ -313,7 +163,9 @@ export default class Chat {
 			const task = storageRef.put(this.file, this.metadata)
 				.then((snapshot) => {
 					this.image = snapshot.downloadURL;
+					this.files.push(this.image);
 				})
+			this.dbFiles = this.files;
 		}
 		else {
 			alert('Это не картинка');
@@ -323,14 +175,23 @@ export default class Chat {
 		// }
 	}
 
+	chatMessageLabelAsks() {
+	}
+
+	nextSlide(el) {
+	}
+
+	previousSlide(el) {
+	}
+
 	changeMessage(e) {
 		this.messageBtn;
 		e.preventDefault();
 		const target = e.target;
-		this.key = target.getAttribute('data');
-		this.uid = this.auth.currentUser.uid;
-		this.dbRef = firebase.database().ref('messages/questions/' + this.key);
 		this.message = e.currentTarget;
+		this.key = this.message.getAttribute('data');
+		this.uid = this.auth.currentUser.uid;
+		this.dbRef = this.getDbRef().child(this.key);
 		this.text = this.message.querySelector('pre');
 		this.previosMessage;
 
@@ -353,6 +214,30 @@ export default class Chat {
 					//this.message.querySelector('label[label="load"]').classList.add('hide');
 					this.message.querySelector('.btn-close').classList.remove('hide');
 				}
+
+				this.message.querySelector('button[btn="remove"]').classList.add('hide');
+				this.message.querySelector('button[btn="change"]').classList.add('hide');
+			}
+
+			else if (target.getAttribute('btn') === 'send') {
+				this.textarea = this.message.querySelector('textarea').value;
+
+				let newData = {
+					"text": this.textarea
+				};
+
+				this.dbRef.update(newData);
+				this.dbRef.on('child_changed', snap => {
+					const val = snap.val();
+					this.text.innerText = val;
+				});
+				this.currentMessageWrap.remove();
+				if (this.message.querySelector('.btn-close')) {
+					this.message.querySelector('.btn-close').classList.add('hide');
+				}
+
+				this.message.querySelector('button[btn="remove"]').classList.remove('hide');
+				this.message.querySelector('button[btn="change"]').classList.remove('hide');
 			}
 
 			else if (target.getAttribute('btn') === 'remove') {
@@ -365,23 +250,18 @@ export default class Chat {
 					this.message.remove();
 				});
 			}
-			else if (target.getAttribute('btn') === 'send') {
-				this.textarea = this.message.querySelector('textarea').value;
-				let newData = {
-					"text": this.textarea
-				};
-				this.dbRef.update(newData);
-				this.dbRef.on('child_changed', snap => {
-					const val = snap.val();
-					this.text.innerText = val;
-				});
-				this.currentMessageWrap.remove();
-			}
 
 			else if (target.getAttribute('btn') === 'reset') {
 				if (document.querySelector('#message-wrap')) {
 					document.querySelector('#message-wrap').remove();
 				}
+
+				if (this.message.querySelector('.btn-close')) {
+					this.message.querySelector('.btn-close').classList.add('hide');
+				}
+
+				this.message.querySelector('button[btn="remove"]').classList.remove('hide');
+				this.message.querySelector('button[btn="change"]').classList.remove('hide');
 			}
 
 			else if (target.getAttribute('btn') === 'delete') {
@@ -394,6 +274,7 @@ export default class Chat {
 					this.image.remove();
 				});
 			}
+
 			else if (target.getAttribute('btn') === 'answer') {
 				drawChat(this.message, this.key);
 				this.message.querySelector('.chat__form-wrap').classList.remove('hide');
@@ -403,6 +284,14 @@ export default class Chat {
 			if (target.getAttribute('btn') === 'sendAnswer') {
 				//this.messagesRef = this.database.ref('messages/answers/');
 				this.saveMessage.bind(this);
+			}
+
+			if (target.getAttribute('controls') === 'prev') {
+				this.previousSlide(this.message);
+			}
+
+			if (target.getAttribute('controls') === 'next') {
+				this.nextSlide(this.message);
 			}
 		}
 
@@ -419,6 +308,7 @@ export default class Chat {
 			this.dbRef.on('child_removed', () => {
 				this.image.remove();
 			});
+			this.message.querySelector('.message__img-wrap').remove();
 		}
 			this.previosMessage = this.message;
 			this.previosMessageWrap = this.currentMessageWrap;
