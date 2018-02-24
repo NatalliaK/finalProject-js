@@ -1,6 +1,6 @@
 language: node_js
 node_js:
- — “8.9.4”
+ — “8.9.4.0”
 script:
  — echo “Deploy!!”
 install:
@@ -8,4 +8,4 @@ install:
 filter_secrets:
   --false
 after_success:
- — firebase deploy — project projectId — token $FIREBASE_TOKEN
+ — firebase deploy — project "athletic-24d64" — token $FIREBASE_TOKEN
