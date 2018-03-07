@@ -1,5 +1,4 @@
 import Chat from './../chat/chat';
-import Swiper from 'swiper';
 
 export default class News extends Chat {
 	constructor() {

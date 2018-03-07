@@ -94,6 +94,10 @@
 	font-size: $body-fz * 1.1;
 	border-top: 1px dotted $orange;
 	border-collapse: collapse;
+
+	pre {
+		white-space: pre-wrap;
+	}
 }
 
 .message__text-change {

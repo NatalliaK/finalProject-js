@@ -1,6 +1,6 @@
 .container__wrap {
 	max-width: 830px;
-	margin: 7% auto 5%;
+	margin: 60px auto 50px;
 	padding: 5%;
 
 	font-family: $confortaa;
@@ -8,25 +8,51 @@
 
 .container__p-wrap {
 	position: relative;
+	z-index: 2;
 
 	padding-top: 58px;
 	padding-bottom: 58px;
 }
 
 .container__p {
-	padding: 30px 20px;
+	padding: 40px 20px;
 	line-height: 1.5em;
 
 	&--orange {
 		background-color: orange;
+
+		&:after {
+			position: absolute;
+			content: "";
+			top: 20px;
+			right: -15px;
+			z-index: -1;
+
+			width: 20%;
+			height: 85%;
+
+			background-color: $grey;
+		}
 	}
 }
+
+.container__em {
+	font-family: $play;
+	font-size: $body-fz * 1.2;
+	color: $lightorange;
+	letter-spacing: 2px;
+}
+
+.container__h2 {
+	font-family: $confortaa;
+	color: $orange;
+ }
 
 .container__h3 {
 	margin: 30px 0;
 	padding-left: 30px;
 
-	font-size: $body-fz * 1.7;
+	font-size: $body-fz * 1.5;
 	color: $orange;
 }
 
@@ -38,4 +64,17 @@
 
 .container__li {
 	margin: 20px 0;
+	padding-left: 35px;
+
+	background: url(img/vac.png) 0 -3px no-repeat;
+}
+
+@media (min-width: $tab) {
+	.container__h2 {
+		text-align: center;
+	}
+
+	.container__em {
+		font-size: $body-fz * 1.4;
+	}
 }

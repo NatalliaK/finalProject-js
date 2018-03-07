@@ -3,6 +3,10 @@
 	padding: 0;
 }
 
+h1 {
+	font-size: inherit;
+}
+
 ul, li {
 	list-style: none;
 }
@@ -14,4 +18,8 @@ a {
 img {
 	width: 100%;
 	height: auto;
+}
+
+em {
+	font-style: normal;
 }

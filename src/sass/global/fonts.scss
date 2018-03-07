@@ -26,10 +26,16 @@
 	src: url(fonts/ElMessiri.woff2)
 }
 
+@font-face {
+	font-family: "Play-Bold";
+	src: url(fonts/Play-Bold.ttf)
+}
+
 $russo: "Russo One", Helvetica, Arial, sans-serif;
 $confortaa: "Comfortaa" ,Comic Sans MS, Comic Sans, cursive;
 $seymour: "Seymour One", Helvetica, Arial, sans-serif;
 $messiri: "ElMessiri";
+$play: "Play-Bold";
 
 //font-family: 'Play', sans-serif;
 //font-family: 'Russo One', sans-serif;

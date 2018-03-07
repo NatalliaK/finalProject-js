@@ -7,24 +7,26 @@
 		fill: orange;
 	}
 
+	&--grey {
+		fill: $grey;
+	}
+
 	&--top {
-		top: 0;
+		top: -15px;
 		left: 0;
 	}
 
-	&--bottom {
-		bottom: -91px;
+	&--top-1 {
+		top: -30px;
+		left: 15px;
 	}
-}
 
-@media (min-width: $tab) {
-	.bg-triangle {
-		&--top {
-			top: -2px;
-		}
+	&--bottom {
+		bottom: -65px;
+	}
 
-		&--bottom {
-			bottom: -92px;
-		}
+	&--bottom-1 {
+		bottom: -80px;
+		left: 15px;
 	}
 }
