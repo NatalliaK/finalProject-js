@@ -1,0 +1,6 @@
+.wave {
+	//font-size: $body-fz * 2.5;
+	color: $yellow;
+	text-shadow: 0 -3px 10px black, 0 2px 0 lightyellow;
+	animation: 1.5s color infinite;
+}
