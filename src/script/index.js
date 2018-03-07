@@ -91,7 +91,7 @@ var router = new Router({
 				header.classList.add('header--asks');
 				header.querySelector('.header__h1').className = 'hide header__h1 header__h1--print-txt';
 				let h1 = new TypeText(wrapH1);
-				window.onhashchange = () => h1.createSpan();
+				//window.onhashchange = () => h1.createSpan();
 				window.onload = () => h1.createSpan();
 
 				if (!doc.querySelector('#btnAuth')) {
@@ -121,6 +121,7 @@ var router = new Router({
 
 			},
 			leave: () => {
+				let h1 = doc.querySelector('.header__h1');
 				let wrap = doc.querySelector('.header__wrap-h1');
 				let wave = document.querySelectorAll('.wave');
 				wave.forEach((el) => {
@@ -128,6 +129,8 @@ var router = new Router({
 				});
 				wrap.removeChild(wrap.lastChild);
 				doc.querySelector('.header').classList.remove('header--asks');
+				h1.classList.remove('hide');
+				h1.classList.remove('header__h1--print-txt');
 				doc.querySelector('#auth').classList.add('hide');
 				container.innerHTML = '';
 			}
